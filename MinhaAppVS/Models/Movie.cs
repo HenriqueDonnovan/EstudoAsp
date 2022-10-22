@@ -15,12 +15,12 @@ namespace MinhaAppVS.Models
         public string Title { get; set; }
 
         [Required(ErrorMessage ="The field date must be filled")]
-        [DataType(DataType.DateTime, ErrorMessage = "Incorrect format date")]
+        [DataType("dd/MM/yyyy", ErrorMessage = "Incorrect format date")]
         [Display(Name = "Release Date")]
         public DateTime ReleaseDate { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z\u00C0-|u00FF""'\w-]*$", ErrorMessage = "Invalid format")]
-        [StringLength(60, ErrorMessage = "Max is 60 characters")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\u00C0-\u00FF""'\w-]*$", ErrorMessage = "Invalid format")]
+        [StringLength(60, ErrorMessage = "Max is 60 characters"), Required(ErrorMessage = "This field is required")]
         public string Genre { get; set; }
 
         [Required]
@@ -28,7 +28,9 @@ namespace MinhaAppVS.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Value { get; set; }
 
-        [DisplayName("Avaliation")]
-        public string Avaliation { get; set; }
+        [Required(ErrorMessage = "This field must be filled")]
+        [Display(Name = "Avaliation")]
+        [RegularExpression(@"^[0-5]*$", ErrorMessage = "Just numbers")]
+        public int Avaliation { get; set; }
     }
 }
